@@ -1,0 +1,43 @@
+﻿@model List<Pokemon>
+
+<div class="container-fluid text-center">
+    <div class="container">
+        <h1>Pokemon de la Semana</h1>
+        <figure class="figure" style="width: 30%;">
+            <img src="@(Model.Any() ? Model[0].sprites.front_default : "")"
+                 class="figure-img img-fluid rounded"
+                 alt="Pokemon de la semana">
+            <figcaption class="figure-caption">Descripción del pokemon.</figcaption>
+        </figure>
+    </div>
+
+    <div class="container" style="width: 50%;">
+        <h1>Galería de Pokemons</h1>
+        <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-inner">
+                @foreach (var pokemon in Model)
+                {
+                    <div class="@(pokemon.id == 1 ? "carousel-item active" : "carousel-item")">
+                        <img src="@pokemon.sprites.front_default" class="d-block w-100" alt="@pokemon.name">
+                        @if (pokemon.weight > 7)
+                        {
+                            <h5>Es pesado</h5>
+                        }
+                        else
+                        {
+                            <h5>Es Liviano</h5>
+                        }
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
